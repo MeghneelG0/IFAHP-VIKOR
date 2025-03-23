@@ -3,8 +3,8 @@ import pandas as pd
 from ifahp_weights.weights import convert_to_crisp_weights
 
 # Assuming you need to convert some fuzzy weights to crisp weights
-fuzzy_weights = [...]  # Define your fuzzy weights here
-crisp_weights = convert_to_crisp_weights(fuzzy_weights)
+# fuzzy_weights = [...]  # Define your fuzzy weights here
+# crisp_weights = convert_to_crisp_weights(fuzzy_weights)
 
 
 def determine_best_and_worst(decision_matrix, criteria_types):

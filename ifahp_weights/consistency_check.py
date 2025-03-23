@@ -1,4 +1,4 @@
-def check_consistency(R, R_bar, tau=0.1):
+def check_consistency(R, R_bar, tau=0.1, verbose=False):
     """
     Computes the distance d between the original IFPR matrix R and 
     the perfectly multiplicative consistent IFPR matrix R_bar using:
@@ -14,6 +14,7 @@ def check_consistency(R, R_bar, tau=0.1):
       R      : Original IFPR matrix (n x n x 2 numpy array)
       R_bar  : Consistent IFPR matrix (n x n x 2 numpy array)
       tau    : Threshold for acceptable consistency (default: 0.1)
+      verbose: Whether to print the distance (default: False)
     
     Returns:
       (bool) True if d < tau, else False.
@@ -39,5 +40,6 @@ def check_consistency(R, R_bar, tau=0.1):
     denominator = (n - 1) * (n - 2)
     d = total_diff / denominator
     
-    print("Distance d(R, R_bar) =", d)
+    if verbose:
+        print("Distance d(R, R_bar) =", d)
     return d < tau

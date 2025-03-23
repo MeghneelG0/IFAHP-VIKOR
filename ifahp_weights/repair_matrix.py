@@ -2,7 +2,7 @@ import numpy as np
 from .consistency_check import check_consistency
 from .pmc_matrix import construct_perfect_multiplicative_consistent_ifpr
 
-def repair_ifahp_algorithm_2(R, sigma=0.5, tau=0.1, max_iter=100):
+def repair_ifahp_algorithm_2(R, sigma=0.5, tau=0.1, max_iter=100, verbose=False):
     """
     Repairs the IFPR R using the fused intuitionistic preference algorithm (Algorithm 2)
     until the consistency measure d(R, R_bar) < tau.
@@ -20,9 +20,11 @@ def repair_ifahp_algorithm_2(R, sigma=0.5, tau=0.1, max_iter=100):
     """
     # First, compute the perfect IFPR matrix.
     R_bar = construct_perfect_multiplicative_consistent_ifpr(R)
-    print("Initial consistency check:")
-    if check_consistency(R, R_bar, tau):
-        print("R is already consistent with R_bar; no repair needed.")
+    if verbose:
+        print("Initial consistency check:")
+    if check_consistency(R, R_bar, tau, verbose):
+        if verbose:
+            print("R is already consistent with R_bar; no repair needed.")
         return R
 
     # Start the iterative repair process.
@@ -64,12 +66,15 @@ def repair_ifahp_algorithm_2(R, sigma=0.5, tau=0.1, max_iter=100):
                 mu_val, nu_val = R_next[i, k]
                 R_next[k, i] = [nu_val, mu_val]
         
-        print(f"Iteration {p+1} consistency check:")
-        if check_consistency(R_next, R_bar, tau):
-            print(f"Repair successful after {p+1} iterations.")
+        if verbose:
+            print(f"Iteration {p+1} consistency check:")
+        if check_consistency(R_next, R_bar, tau, verbose):
+            if verbose:
+                print(f"Repair successful after {p+1} iterations.")
             return R_next
         
         R_current = R_next
     
-    print("Max iterations reached; returning final repaired matrix.")
+    if verbose:
+        print("Max iterations reached; returning final repaired matrix.")
     return R_current
