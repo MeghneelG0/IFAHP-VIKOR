@@ -2,11 +2,13 @@
 
 This project implements the Intuitionistic Fuzzy Analytic Hierarchy Process (IFAHP) combined with VIKOR method for requirements prioritization.
 
+> **Note:** The Python scripts (including main.py) are currently under development. All main functionality is currently implemented in Jupyter notebooks as described below.
+
 ## Installation
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/ifahpVikor_SRPM.git
+git clone https://github.com/yourusername/IFAHP-VIKOR.git
 cd ifahpVikor_SRPM
 ```
 
@@ -15,43 +17,19 @@ cd ifahpVikor_SRPM
 pip install -r requirements.txt
 ```
 
-## Usage
+## Jupyter Notebooks
 
-### Basic Usage
+The core functionality of this project is implemented in the following Jupyter notebooks:
 
-Run the main script to process the requirements file and generate rankings:
+- **ifahpCode_validation.ipynb**: Evaluation and validation script that reproduces the process described in the accompanying research paper. The Intuitionistic Fuzzy Preference Relation (IFPR) matrix used in this notebook is taken directly from the case study section of the research to demonstrate and verify the correctness of the implemented code.
 
-```bash
-python main.py
-```
+- **ifahpVIKOR.ipynb**: Contains the overall implementation of the IFAHP-VIKOR hybrid model for general use.
 
-This will:
-1. Load requirements from `Requirements.csv` (if available)
-2. Perform IFAHP-VIKOR analysis
-3. Display top ranked requirements
-4. Save full rankings to `Ranked_Requirements.csv`
+- **ifahpvikorTCP.ipynb**: Applies the IFAHP-VIKOR approach to a large dataset with 2000 alternatives and 5 criteria for test case prioritization.
 
-### Input Format
+- **ifahpWeights_caseStudy.ipynb**: Provides methods for converting AHP weights to IFAHP weights for comparative analysis as described in the research paper.
 
-The `Requirements.csv` file should contain the following columns:
-- `Req ID`: Requirement identifier
-- `Req Name`: Short name of the requirement
-- `Description`: Detailed description
-- `Cost`: Cost rating (higher values = higher cost)
-- `Value`: Value rating (higher values = more valuable)
-- `Importance`: Importance level ('H', 'M', 'L')
-- `Pre-requisite`: Any prerequisite requirements
-- `Test Cases`: Test case information
-
-Only Cost, Value, and Importance are used in the prioritization.
-
-### Advanced Usage
-
-To see detailed calculation steps and intermediate values, modify the `main()` function in `main.py` to set the verbose parameter to True:
-
-```python
-rankings, Q, S, R, compromise_solution, conditions_satisfied, data = compute_ifahp_vikor(verbose=True)
-```
+- **mcdm.ipynb**: Contains implementations for comparing various hybrid MCDM models including AHP, FAHP, IFAHP with VIKOR and TOPSIS.
 
 ## Method Overview
 
@@ -67,16 +45,6 @@ This implementation combines two multi-criteria decision making approaches:
    - Evaluates alternatives based on utility and regret measures
    - Identifies compromise solutions
 
-## Project Structure
+## Future Development
 
-- `main.py`: Main script for running the prioritization
-- `ifahp_weights/`: Modules for IFAHP calculations
-  - `pmc_matrix.py`: Perfect multiplicative consistent matrix construction
-  - `consistency_check.py`: Consistency verification
-  - `repair_matrix.py`: Matrix repair algorithms
-  - `weights.py`: Weight calculation functions
-- `vikor/`: Modules for VIKOR calculations
-  - `decision_matrix.py`: Decision matrix operations
-  - `utility_measures.py`: Utility and regret calculations
-  - `ranking.py`: Ranking functions
-  - `vikor_conditions.py`: Condition checking for compromise solutions
+The standalone Python scripts are under development and will eventually provide the same functionality as the Jupyter notebooks in a more modular format.
